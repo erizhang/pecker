@@ -5,9 +5,7 @@ from os.path import isfile, join
 import re
 import json
 
-path = "/Users/erizhang/workspace/linux/html";
-#path = "./";
-
+path = "" #specify the path where the dot files locate
 
 def get_hash(f):
     words = f.split("_");
