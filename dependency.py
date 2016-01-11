@@ -7,7 +7,7 @@ import json
 
 import argparse
 
-path = "/home/erizhang/workspace/lab/html" #specify the path where the dot files locate
+path = "/home/erizhang/workspace/lab/sample/html"
 
 def get_hash(f):
     words = f.split("_");
@@ -79,23 +79,30 @@ if __name__ == "__main__":
         with open(join(path, f)) as fp:
             lines = fp.readlines();
             node["name"] = get_function_name(lines);
-            
+            targets = []
             targets = get_function_direct_calls(lines);
+            node["fan-in"] = len(targets);
         fp.close();
-
-        for t in targets:
-            link = {};
-            link["source"] = node["hash"];
-            link["target"] = t["hash"];
-            links.append(link);
 
         nodes.append(node);
         nodes = nodes + targets;
 
+    icgraphfiles = [f for f in dotfiles if "_icgraph" in f];
+    for f in icgraphfiles:
+        filename = get_source_name(f);
+        hashcode = get_hash(f);
+        fan_out = 0;
+
+        with open(join(path, f)) as fp:
+            lines = fp.readlines();
+            targets = [];
+            targets = get_function_direct_calls(lines);
+            fan_out = len(targets);
+
+        for node in nodes:
+            if node["hash"] == hashcode:
+                node["fan-out"] = fan_out;
+
     nodes = make_unique(nodes);
-    links = make_unique(links);
 
-    print json.JSONEncoder().encode({"nodes": nodes, "links": links});
-
-#def seizing(nodes, links):
-    
+    print json.JSONEncoder().encode({"nodes": nodes});
