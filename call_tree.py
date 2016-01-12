@@ -53,6 +53,28 @@ def make_unique(original_list):
     map(lambda x: unique_list.append(x) if (x not in unique_list) else False, original_list)
     return unique_list
 
+
+def read_called_tree(path):
+    dotfiles = [f for f in listdir(path) if (isfile(join(path, f))and f.endswith(".dot"))];
+    icgraphfiles = [f for f in dotfiles if "_icgraph" in f];
+    nodes = [];
+    links = [];
+
+    for f in icgraphfiles:
+        node = {};
+        node["file"] = get_source_name(f);
+        node["hash"] = get_hash(f);
+
+        with open(join(path, f)) as fp:
+            lines = fp.readlines();
+            node["name"] = get_function_name(lines);
+            node['calls'] = get_function_direct_calls(lines);
+        fp.close();
+        nodes.append(node);
+
+    nodes = make_unique(nodes);
+    return nodes
+
 def read_call_tree(path):
     dotfiles = [f for f in listdir(path) if (isfile(join(path, f))and f.endswith(".dot"))];
     cgraphfiles = [f for f in dotfiles if "_cgraph" in f];
@@ -69,8 +91,8 @@ def read_call_tree(path):
             node["name"] = get_function_name(lines);
             node['calls'] = get_function_direct_calls(lines);
         fp.close();
-
         nodes.append(node);
+
     nodes = make_unique(nodes);
     return nodes
 
@@ -97,22 +119,31 @@ def read_complexity_list(complexity_file):
     nodes = make_unique(nodes);
     return nodes
 
+def isEqual(node, another):
+    if '@'.join([node['name'], node['file']]) ==  '@'.join([another['name'], another['file']]):
+#    if node['file'] == another['file'] and node['name'] == another['name']:
+        return True;
+    return False;
 
 def calc_fan_out(node, call_tree):
     for n in call_tree:
-        if node['file'] == n['file'] and node['name'] == n['name']:
+        if isEqual(node, n):
             return len(n['calls']);
     return 0
 
-def calc_fan_in(node, call_tree):
-    return 0
+def calc_fan_in(node, called_tree):
+    for n in called_tree:
+        if isEqual(node, n):
+            return len(n['calls']);
+    return 0;
 
 if __name__ == '__main__':
-    call_tree_nodes = read_call_tree("/home/erizhang/workspace/lab/html");
-    nodes = read_complexity_list("./ctest");
+    call_tree_nodes = read_call_tree("/home/erizhang/workspace/lab/sample/html");
+    called_tree_nodes = read_called_tree("/home/erizhang/workspace/lab/sample/html");
+    nodes = read_complexity_list("/home/erizhang/workspace/lab/sample/complexity")#"./complexity.tst");
     for node in nodes:
         node['fan-out'] = calc_fan_out(node, call_tree_nodes);
-        node['fan-in'] = calc_fan_in(node, call_tree_nodes);
+        node['fan-in'] = calc_fan_in(node, called_tree_nodes);
 
-    print nodes
+#    print nodes
     print json.JSONEncoder().encode({"nodes": nodes});
