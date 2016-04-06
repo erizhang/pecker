@@ -1,3 +1,7 @@
+# tools temp files
+*.json
+complexity.*
+
 # Emacs temp files
 *~
 \#*#

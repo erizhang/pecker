@@ -6,7 +6,7 @@ source_dirs = []
 
 def isContainSourceFile(files):
     for file in files:
-        if file.endswith(".c") or file.endswith(".cpp"):
+        if file.endswith(".h") or file.endswith(".hpp"):
             return True
     return False
 
@@ -16,5 +16,5 @@ def sources(dir):
             source_dirs.append(root)
 
 if __name__ == '__main__':
-    sources('/home/erizhang/workspace/nginx/src/')
+    sources('/home/erizhang/cougar')
     print " ".join(source_dirs)
