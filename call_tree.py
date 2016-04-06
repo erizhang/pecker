@@ -45,7 +45,6 @@ def get_function_direct_calls(lines):
             target_node["file"] = m.group(2).replace("_8", ".");
             target_node["hash"] = m.group(3);
             targets_nodes.append(target_node);
-#    print targets_nodes
     return targets_nodes;
 
 def make_unique(original_list):
@@ -121,7 +120,6 @@ def read_complexity_list(complexity_file):
 
 def isEqual(node, another):
     if node['name'] ==  another['name']:
-#    if node['file'] == another['file'] and node['name'] == another['name']:
         return True;
     return False;
 
@@ -137,23 +135,19 @@ def calc_fan_in(node, called_tree):
             return len(n['calls']);
     return 0;
 
+
+DOXYGEN_DOTS_DIR  = "/home/erizhang/workspace/lab/html"
+COMPLEXITY_RESULT = "./complexity.tst"
+
+
 if __name__ == '__main__':
-#    call_tree_nodes = read_call_tree("/home/erizhang/workspace/lab/sample/html");
-#    called_tree_nodes = read_called_tree("/home/erizhang/workspace/lab/sample/html");
-#    nodes = read_complexity_list("/home/erizhang/workspace/lab/sample/complexity")#"./complexity.tst");
-
-#    call_tree_nodes = read_call_tree("/home/erizhang/workspace/lab/html");
-#    called_tree_nodes = read_called_tree("/home/erizhang/workspace/lab/html");
-#    nodes = read_complexity_list("./complexity.tst");
-
-    call_tree_nodes = read_call_tree("/home/erizhang/workspace/lab/html");
-    called_tree_nodes = read_called_tree("/home/erizhang/workspace/lab/html");
-    nodes = read_complexity_list("./complexity.tst");
+    call_tree_nodes = read_call_tree(DOXYGEN_DOTS_DIR);
+    called_tree_nodes = read_called_tree(DOXYGEN_DOTS_DIR);
+    nodes = read_complexity_list(COMPLEXITY_RESULT);
 
 
     for node in nodes:
         node['fan_out'] = calc_fan_out(node, call_tree_nodes);
         node['fan_in'] = calc_fan_in(node, called_tree_nodes);
 
-#    print nodes
     print json.JSONEncoder().encode({"nodes": nodes});
