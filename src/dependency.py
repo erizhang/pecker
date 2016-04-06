@@ -7,7 +7,7 @@ import json
 
 import argparse
 
-path = "/home/erizhang/workspace/lab/sample/html"
+path = "../.tmp/dot"
 
 def get_hash(f):
     words = f.split("_");

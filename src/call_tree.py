@@ -136,8 +136,8 @@ def calc_fan_in(node, called_tree):
     return 0;
 
 
-DOXYGEN_DOTS_DIR  = "/home/erizhang/workspace/lab/html"
-COMPLEXITY_RESULT = "./complexity.tst"
+DOXYGEN_DOTS_DIR  = "../.tmp/dot"
+COMPLEXITY_RESULT = "../.tmp/complexity.tst"
 
 
 if __name__ == '__main__':

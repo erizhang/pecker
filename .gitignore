@@ -1,6 +1,7 @@
 # tools temp files
 *.json
 complexity.*
+.tmp/
 
 # Emacs temp files
 *~
