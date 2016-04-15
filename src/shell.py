@@ -21,7 +21,7 @@ def find_config():
 
 def get_config():
     shortopts = 'c:'
-    longopts = ['help', 'source-base=', 'dots-path=', 'lizard-rep-file=', 'log-file=']
+    longopts = ['help', 'code-base=', 'dots-path=', 'lizard-rep-file=', 'log-file=']
 
     try:
         config_path = find_config()
@@ -41,7 +41,7 @@ def get_config():
             config = {}
 
         for key, value in optlist:
-            if key == '--source-base':
+            if key == '--code-base':
                 config['code_base'] = to_str(value)
             elif key == '--dots-path':
                 config['dots_path'] = to_str(value)
