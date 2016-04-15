@@ -38,22 +38,22 @@ def get_config():
         for key, value in optlist:
             if key == '--source-base':
                 config['code_base'] = to_str(value)
-            elif key = '--dots-path':
+            elif key == '--dots-path':
                 config['dots-path'] = to_str(value)
-            elif key = '--lizard-rep-file':
+            elif key == '--lizard-rep-file':
                 config['complexity-file'] = to_str(value)
-            elif key = '--log-file':
+            elif key == '--log-file':
                 config['log_file'] = to_str(value)
 
 
     except getopt.GetoptError as e:
-        print(e, file=sys.stderr)
+        #print(e, file=sys.stderr)
         #TODO print help
         sys.exit(2)
 
 
     if not config:
-        logging.error('config not specified')
+        #logging.error('config not specified')
         #TODO print help
         sys.exit(2)
     
