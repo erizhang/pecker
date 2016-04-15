@@ -3,8 +3,20 @@ import os
 import sys
 
 
-def exec_cmd():
-    
+def execute(command):
+    print command
+#    os.system(command)
 
-def geneate_command():
-    "sed -i 's/^\(" + key + "\s*=\s*\).*$/\1" + value + "/'" + file_name
+def format_path_expr(value):
+    if '/' in value:
+        val_list = value.split('/')
+        value = "\/".join(val_list)
+    return value
+
+
+def inject(items, config):
+    for key, value in items:
+        formated = format_path_expr(value)
+        command = "sed -i 's/^\(" + key + "\s*=\s*\).*$/\1" + formated + "/'" + config['doxygen_config']
+        execute(command)
+
