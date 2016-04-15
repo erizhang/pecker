@@ -3,6 +3,11 @@ import json
 import sys
 import getopt
 
+def to_str(s):
+    if bytes != str:
+        if type(s) == bytes:
+            return s.decode('utf-8')
+    return s
 
 def find_config():
     config_path = 'config.json'
@@ -39,9 +44,9 @@ def get_config():
             if key == '--source-base':
                 config['code_base'] = to_str(value)
             elif key == '--dots-path':
-                config['dots-path'] = to_str(value)
+                config['dots_path'] = to_str(value)
             elif key == '--lizard-rep-file':
-                config['complexity-file'] = to_str(value)
+                config['complexity_file'] = to_str(value)
             elif key == '--log-file':
                 config['log_file'] = to_str(value)
 
@@ -58,3 +63,34 @@ def get_config():
         sys.exit(2)
     
     return config
+
+
+def _decode_list(data):
+    rv = []
+    for item in data:
+        if hasattr(item, 'encode'):
+            item = item.encode('utf-8')
+        elif isinstance(item, list):
+            item = _decode_list(item)
+        elif isinstance(item, dict):
+            item = _decode_dict(item)
+        rv.append(item)
+    return rv
+
+
+def _decode_dict(data):
+    rv = {}
+    for key, value in data.items():
+        if hasattr(value, 'encode'):
+            value = value.encode('utf-8')
+        elif isinstance(value, list):
+            value = _decode_list(value)
+        elif isinstance(value, dict):
+            value = _decode_dict(value)
+        rv[key] = value
+    return rv
+
+
+def parse_json_in_str(data):
+    # parse json and convert everything from unicode to str
+    return json.loads(data, object_hook=_decode_dict)
