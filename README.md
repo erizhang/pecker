@@ -1,5 +1,6 @@
 Pecker
 --
+[![Build Status](https://travis-ci.org/erizhang/pecker.svg?branch=master)](https://travis-ci.org/erizhang/pecker)
 
 ### How does this tool to generate the fan-in/out information
 #### Step 1. Generate the call graph dot files via `Doxygen`
