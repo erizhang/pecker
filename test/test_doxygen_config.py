@@ -23,3 +23,9 @@ class TestDoxygenConfig(unittest.TestCase):
         path_value = '../name/'
         formated = config.format_path_expr(path_value)
         self.assertEqual('\.\.\/name\/', formated)
+
+    def test_inject_config_entries(self):
+        items = {'SRC':'../name/workspace/src', 'INC':'../name/include', 'CALLER':'YES'}
+        app_config = {'doxygen_config':'Doxygen'}
+        
+        config.inject(items, app_config)

@@ -21,7 +21,7 @@ def find_config():
 
 def get_config():
     shortopts = 'c:'
-    longopts = ['help', 'code-base=', 'dots-path=', 'lizard-rep-file=', 'log-file=']
+    longopts = ['help', 'code-base=', 'dots-path=', 'lizard-rep-file=','doxygen-config=', 'log-file=']
 
     try:
         config_path = find_config()
@@ -47,6 +47,8 @@ def get_config():
                 config['dots_path'] = to_str(value)
             elif key == '--lizard-rep-file':
                 config['complexity_file'] = to_str(value)
+            elif key == '--doxygen-config':
+                config['doxygen_config'] = to_str(value)
             elif key == '--log-file':
                 config['log_file'] = to_str(value)
 
