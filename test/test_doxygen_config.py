@@ -11,4 +11,15 @@ class TestDoxygenConfig(unittest.TestCase):
         formated = config.format_path_expr(path_value)
         self.assertEqual('\/home\/name\/workspace\/pecker \/home\/name', formated)
         
-        
+    def test_give_path_with_dot_convert_shall_with_backward_slash(self):
+        path_value = '.'
+        formated = config.format_path_expr(path_value)
+        self.assertEqual('\.', formated)
+
+        path_value = '..'
+        formated = config.format_path_expr(path_value)
+        self.assertEqual('\.\.', formated)
+
+        path_value = '../name/'
+        formated = config.format_path_expr(path_value)
+        self.assertEqual('\.\.\/name\/', formated)

@@ -11,6 +11,10 @@ def format_path_expr(value):
     if '/' in value:
         val_list = value.split('/')
         value = "\/".join(val_list)
+    if '.' in value:
+        value_list = value.split('.')
+        value = "\.".join(value_list)
+
     return value
 
 
