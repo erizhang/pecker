@@ -2,7 +2,7 @@ Pecker
 --
 [![Build Status](https://travis-ci.org/erizhang/pecker.svg?branch=master)](https://travis-ci.org/erizhang/pecker)
 
-### How does this tool to generate the fan-in/out information
+### 1. How does this tool to generate the fan-in/out information
 #### Step 1. Generate the call graph dot files via `Doxygen`
 We would like to generate the call graph dot files, we have to change the `Doxygen` configuration file as below:
 ```
@@ -42,7 +42,12 @@ We program intent on generate a relationships, and output as specific format, e.
 
 **NOTE:** We shall carefully consider the template situation during parse C plus plus programming language source code.
 
-#### Step 3 Visulize the functions relationship
+
+## 2. Generate the complexity information
+
+The [cyclomatic compelxity](https://en.wikipedia.org/wiki/Cyclomatic_complexity "complexity") could be generate by [lizard](https://github.com/terryyin/lizard "lizard") tool. Detailed information can read lizard's readme.
+
+## 3. Visulize the functions relationship
 
 For such relationship data, we can store the Neo4j such graph database, and the database offer the simple chart to illustrate the data element's relationship.
 
