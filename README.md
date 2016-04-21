@@ -15,7 +15,7 @@ HAVE_DOT               = YES
 CALL_GRAPH             = YES
 CALLER_GRAPH           = YES
 DOTFILE_DIRS           = dotfile
-DOT_CLEANUP            = ON
+DOT_CLEANUP            = NO
 ```
 After execute the command `doxygen`, there will be generate the source code's index files and related inmediate files `*.dot`.
 

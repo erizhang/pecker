@@ -25,8 +25,9 @@ def main():
                       'CALL_GRAPH'     : 'YES',
                       'CALLER_GRAPH'   : 'YES',
                       'DOTFILE_DIRS'   : 'dotfile',
-                      'DOT_CLEANUP'    : 'ON'}
+                      'DOT_CLEANUP'    : 'NO'}
 
+    print app_config
     config.inject(doxygen_config, app_config)
 
     # step 3. generate the dots files of doxygen
