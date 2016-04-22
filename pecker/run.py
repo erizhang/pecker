@@ -35,6 +35,7 @@ def main():
     # step 4. generate the lizard report
 
     # step 5. generate the statistics raw json file
+    report = generate_report(app_config)
 
 if __name__ == '__main__':
     main()
