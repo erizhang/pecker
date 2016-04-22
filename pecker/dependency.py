@@ -7,8 +7,6 @@ import json
 
 import argparse
 
-path = "../.tmp/dot"
-
 def get_hash(f):
     words = f.split("_");
     return words[-2];
@@ -63,10 +61,11 @@ def make_unique(original_list):
     return unique_list
 
 if __name__ == "__main__":
-    
+def generate_report(app_config):
 #    parser = argparse.ArgumentParser(description='Process the input path')
 #    parser.add_argument('path', metavar='P', type=str, nargs='+', help='the path of dot files.')
 #    args = parser.parse_args()
+    path = app_config['dots_path']
 
     dotfiles = [f for f in listdir(path) if (isfile(join(path, f))and f.endswith(".dot"))];
 
