@@ -20,7 +20,7 @@ def main():
                       'INPUT'          : src,
                       'INLINE_SOURCES' : 'YES',
                       'GENERATE_LATEX' : 'NO',
-                      'INCLUDE_PATH'   : inc,
+                      'INCLUDE_PATH'   : inc + " " +  src,
                       'HAVE_DOT'       : 'YES',
                       'CALL_GRAPH'     : 'YES',
                       'CALLER_GRAPH'   : 'YES',
