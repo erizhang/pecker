@@ -136,14 +136,11 @@ def calc_fan_in(node, called_tree):
     return 0;
 
 
-DOXYGEN_DOTS_DIR  = "../.tmp/dot"
-COMPLEXITY_RESULT = "../.tmp/complexity.tst"
 
-
-if __name__ == '__main__':
-    call_tree_nodes = read_call_tree(DOXYGEN_DOTS_DIR);
-    called_tree_nodes = read_called_tree(DOXYGEN_DOTS_DIR);
-    nodes = read_complexity_list(COMPLEXITY_RESULT);
+def generate_report(app_config):
+    call_tree_nodes = read_call_tree(app_config["dots_path"]);
+    called_tree_nodes = read_called_tree(app_config["dots_path"]);
+    nodes = read_complexity_list(app_config["complexity_file"]);
 
 
     for node in nodes:
