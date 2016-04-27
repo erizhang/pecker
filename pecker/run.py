@@ -4,7 +4,7 @@ import os
 import sys
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '../'))
-from pecker import shell, walker, call_tree
+from pecker import shell, walker, method_graph
 from doxygen import config
 
 def main():
@@ -29,13 +29,12 @@ def main():
 
     print app_config
     config.inject(doxygen_config, app_config)
-
     # step 3. generate the dots files of doxygen
 
     # step 4. generate the lizard report
 
     # step 5. generate the statistics raw json file
-    report = call_tree.generate_report(app_config)
+    report = method_graph.generate_report(app_config)
 
 if __name__ == '__main__':
     main()
