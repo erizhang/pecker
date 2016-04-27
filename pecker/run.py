@@ -4,7 +4,7 @@ import os
 import sys
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '../'))
-from pecker import shell, walkinput
+from pecker import shell, walker, call_tree
 from doxygen import config
 
 def main():
@@ -12,8 +12,8 @@ def main():
     print config
 
     # step 1. wakl the code base, list out the header and source files path
-    src = walkinput.headers(app_config)
-    inc = walkinput.sources(app_config)
+    src = walker.headers(app_config)
+    inc = walker.sources(app_config)
 
     # step 2. custimize the doxygen configuration
     doxygen_config = {'EXTRACT_ALL'    : 'YES',
@@ -35,7 +35,7 @@ def main():
     # step 4. generate the lizard report
 
     # step 5. generate the statistics raw json file
-    report = generate_report(app_config)
+    report = call_tree.generate_report(app_config)
 
 if __name__ == '__main__':
     main()
