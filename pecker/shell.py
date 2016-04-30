@@ -3,6 +3,11 @@ import json
 import sys
 import getopt
 
+def execute_command(command):
+    ret = os.system(command)
+    return ret
+
+
 def to_str(s):
     if bytes != str:
         if type(s) == bytes:
