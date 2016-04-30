@@ -30,6 +30,9 @@ def main():
     print app_config
     config.inject(doxygen_config, app_config)
     # step 3. generate the dots files of doxygen
+    # TODO: shall indicate the dots files path
+    command = 'doxygen ' + app_config['doxygen_config']
+    shell.execute_command(command)
 
     # step 4. generate the lizard report
 
