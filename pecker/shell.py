@@ -24,6 +24,14 @@ def find_config():
     return None
 
 
+def usage():
+    print 'Usage:'
+    print '  code-base=REQUIED         '
+    print '  dots-path=REQUIED         '
+    print '  lizard-rep-file=OPTION    '
+    print '  doxygen-config=REQUIED    '
+    print '  log-file=REQUIED          '
+
 def get_config():
     shortopts = 'c:'
     longopts = ['help', 'code-base=', 'dots-path=', 'lizard-rep-file=','doxygen-config=', 'log-file=']
@@ -46,7 +54,9 @@ def get_config():
             config = {}
 
         for key, value in optlist:
-            if key == '--code-base':
+            if key == 'help':
+                usage()
+            elif key == '--code-base':
                 config['code_base'] = to_str(value)
             elif key == '--dots-path':
                 config['dots_path'] = to_str(value)
